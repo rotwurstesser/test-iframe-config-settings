@@ -18,7 +18,7 @@
     <script>
         // Message handler for device settings
         window.addEventListener('message', function(event) {
-            if (event.data.type === "deviceSettings") {
+            if (event.data.type === "saveDeviceSettings") {
                 localStorage.setItem("deviceSettings", JSON.stringify(event.data.payload));
                 console.log("Device settings saved:", event.data.payload);
             }
