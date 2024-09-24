@@ -5,19 +5,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>test</title>
+  <script>
+    // Message handler for device settings
+    window.addEventListener('message', function (event) {
+      if (event.data.type === "saveDeviceSettings") {
+        localStorage.setItem("saveDeviceSettings", JSON.stringify(event.data.payload));
+        console.log("Device settings saved:", event.data.payload);
+      }
+    });
+  </script>
 </head>
 
 <body>
-
   <div
     style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw;">
     <iframe src="https://onlineberatung-qa.service.migros.cloud/de/swisscom/call/box/settings"
-      style="width: 80vw; height: 80vh; border: none;"
-      sandbox="allow-scripts allow-same-origin"
-      allow="camera;microphone"
-      ></iframe>
+      style="width: 80vw; height: 80vh; border: none;" sandbox="allow-scripts allow-same-origin"
+      allow="camera;microphone"></iframe>
   </div>
-
 </body>
 
 </html>
