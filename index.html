@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>test</title>
-  <script>
-    // Message handler for device settings
-    window.addEventListener('message', function (event) {
-      if (event.data.type === "saveDeviceSettings") {
-        localStorage.setItem("saveDeviceSettings", JSON.stringify(event.data.payload));
-        console.log("Device settings saved:", event.data.payload);
-      }
-    });
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    
+    <!-- Permissive Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;
+        script-src * 'unsafe-inline' 'unsafe-eval';
+        connect-src * 'unsafe-inline';
+        img-src * data: blob: 'unsafe-inline';
+        frame-src *;
+        style-src * 'unsafe-inline';
+    ">
+
+    <script>
+        // Message handler for device settings
+        window.addEventListener('message', function(event) {
+            if (event.data.type === "deviceSettings") {
+                localStorage.setItem("deviceSettings", JSON.stringify(event.data.payload));
+                console.log("Device settings saved:", event.data.payload);
+            }
+        });
+    </script>
 </head>
-
 <body>
-  <div
-    style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw;">
-    <iframe src="https://onlineberatung-qa.service.migros.cloud/de/swisscom/call/box/settings"
-      style="width: 80vw; height: 80vh; border: none;" sandbox="allow-scripts allow-same-origin"
-      allow="camera;microphone"></iframe>
-  </div>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100vw;">
+        <iframe 
+            src="https://onlineberatung-qa.service.migros.cloud/de/swisscom/call/box/settings"
+            style="width: 80vw; height: 80vh; border: none;"
+            allow="camera; microphone; fullscreen; display-capture; autoplay"
+        ></iframe>
+    </div>
 </body>
-
 </html>
